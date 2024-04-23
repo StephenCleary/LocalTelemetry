@@ -33,3 +33,5 @@ Traces are _not_ persisted.
 ## Contributing
 
 It would be great to have some good Grafana dashboard definitions out of the box.
+
+Also, configuration examples for different languages. I'll get around to doing a .NET one sooner or later.
