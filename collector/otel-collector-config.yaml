@@ -1,0 +1,41 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+
+exporters:
+  debug:
+
+  # Temporary Prometheus scrape endpoint.
+  # Prometheus 3.0 will include OTLP support.
+  prometheus:
+    endpoint: "0.0.0.0:9464"
+
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  zipkin:
+    endpoint: http://zipkin:9411/api/v2/spans
+    format: proto
+
+  otlphttp/seq:
+    endpoint: http://seq/ingest/otlp
+
+  otlp/aspire:
+    endpoint: aspire:18889
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug, otlp/jaeger, zipkin, otlphttp/seq, otlp/aspire]
+    metrics:
+      receivers: [otlp]
+      exporters: [debug, prometheus, otlp/aspire]
+    logs:
+      receivers: [otlp]
+      exporters: [debug, otlphttp/seq, otlp/aspire]
