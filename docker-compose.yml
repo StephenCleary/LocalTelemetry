@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   collector:
@@ -53,10 +51,12 @@ services:
       - 3000:3000
 
   aspire:
-    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
     restart: unless-stopped
     ports:
       - 18888:18888
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
 
 # Traces are ephemeral.
 # Logs and metrics are persisted.
