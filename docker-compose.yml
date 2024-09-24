@@ -1,11 +1,13 @@
 services:
 
   collector:
-    image: otel/opentelemetry-collector
+    image: otel/opentelemetry-collector-contrib
     restart: unless-stopped
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml:cached
+    env_file:
+      - .env
     ports:
       - 4317:4317 # App -> Collector
 
