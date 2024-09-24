@@ -29,14 +29,17 @@ exporters:
     tls:
       insecure: true
 
+  azuremonitor:
+    maxbatchinterval: 1s
+
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [debug, otlp/jaeger, zipkin, otlphttp/seq, otlp/aspire, otlp/grafana]
+      exporters: [debug, otlp/jaeger, zipkin, otlphttp/seq, otlp/aspire, otlp/grafana, azuremonitor]
     metrics:
       receivers: [otlp]
-      exporters: [debug, otlp/aspire, otlp/grafana]
+      exporters: [debug, otlp/aspire, otlp/grafana, azuremonitor]
     logs:
       receivers: [otlp]
-      exporters: [debug, otlphttp/seq, otlp/aspire, otlp/grafana]
+      exporters: [debug, otlphttp/seq, otlp/aspire, otlp/grafana, azuremonitor]
