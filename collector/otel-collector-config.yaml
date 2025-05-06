@@ -7,10 +7,10 @@ receivers:
 exporters:
   debug:
 
-  # Temporary Prometheus scrape endpoint.
-  # Prometheus 3.0 will include OTLP support.
-  prometheus:
-    endpoint: "0.0.0.0:9464"
+  otlp/grafana:
+    endpoint: grafana:4317
+    tls:
+      insecure: true
 
   otlp/jaeger:
     endpoint: jaeger:4317
@@ -33,10 +33,10 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [debug, otlp/jaeger, zipkin, otlphttp/seq, otlp/aspire]
+      exporters: [debug, otlp/jaeger, zipkin, otlphttp/seq, otlp/aspire, otlp/grafana]
     metrics:
       receivers: [otlp]
-      exporters: [debug, prometheus, otlp/aspire]
+      exporters: [debug, otlp/aspire, otlp/grafana]
     logs:
       receivers: [otlp]
-      exporters: [debug, otlphttp/seq, otlp/aspire]
+      exporters: [debug, otlphttp/seq, otlp/aspire, otlp/grafana]

@@ -31,22 +31,11 @@ services:
     ports:
       - 9411:9411
 
-  prometheus:
-    image: prom/prometheus
-    restart: unless-stopped
-    volumes:
-      - prometheus-data:/prometheus
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:cached
-
   grafana:
-    image: grafana/grafana-enterprise
+    image: grafana/otel-lgtm
     restart: unless-stopped
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning:cached
     ports:
       - 3000:3000
 
