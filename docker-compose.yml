@@ -51,5 +51,4 @@ services:
 # Logs and metrics are persisted.
 volumes:
   seq-data:
-  prometheus-data:
   grafana-data:
