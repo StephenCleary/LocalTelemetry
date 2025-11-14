@@ -7,7 +7,8 @@ services:
     volumes:
       - ./collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml:cached
     ports:
-      - 4317:4317 # App -> Collector
+      - 4317:4317
+      - 4318:4318
 
   seq:
     image: datalust/seq
