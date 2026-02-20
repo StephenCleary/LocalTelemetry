@@ -15,6 +15,7 @@ services:
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_NOAUTHENTICATION=True
     volumes:
       - seq-data:/data
     ports:
