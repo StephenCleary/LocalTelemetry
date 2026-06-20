@@ -1,11 +1,13 @@
 services:
 
   collector:
-    image: otel/opentelemetry-collector
+    build: ./collector
     restart: unless-stopped
-    command: ["--config=/etc/otel-collector-config.yaml"]
+    environment:
+      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
+    entrypoint: ["/bin/sh", "/etc/collector/start.sh"]
     volumes:
-      - ./collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml:cached
+      - ./collector/config:/etc/collector:cached
     ports:
       - 4317:4317
       - 4318:4318
