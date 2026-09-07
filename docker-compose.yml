@@ -5,6 +5,9 @@ services:
     restart: unless-stopped
     environment:
       - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY:-}
+      - AZURE_TRACES_ENDPOINT=${AZURE_TRACES_ENDPOINT:-}
+      - AZURE_LOGS_ENDPOINT=${AZURE_LOGS_ENDPOINT:-}
+      - AZURE_METRICS_ENDPOINT=${AZURE_METRICS_ENDPOINT:-}
     entrypoint: ["/bin/sh", "/etc/collector/start.sh"]
     volumes:
       - ./collector/config:/etc/collector:cached
