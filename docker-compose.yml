@@ -40,7 +40,7 @@ services:
       - 3000:3000
 
   aspire:
-    image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
+    image: mcr.microsoft.com/aspire/dashboard:latest
     restart: unless-stopped
     ports:
       - 18888:18888
